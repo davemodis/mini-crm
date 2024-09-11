@@ -1,0 +1,54 @@
+.phpintel
+
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# sublime project files
+surfe.be.sublime-project
+surfe.be.sublime-workspace
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+composer.lock
+./composer.phar
+./composer.lock
+
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+codeception.yml
+tests/_output/*
+tests/_support/_generated
+tests/.env
+
+#vagrant folder
+/.vagrant
+
+
+runtime/**
+web/assets/**
+web/static/upload/**
+web/static/upload
+web/static/upload_old
+
+.env
