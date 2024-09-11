@@ -54,6 +54,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            // Валидация email
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique'],
+
+            // Валидация role
+            ['role', 'required'],
+            ['role', 'in', 'range' => ['admin', 'manager']],
+
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
@@ -84,6 +93,17 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by email
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -209,5 +229,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * Определяет, является ли пользователь админом
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }
