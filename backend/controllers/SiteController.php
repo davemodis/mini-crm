@@ -56,7 +56,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Домашняя страница перенаправляет на Список заявок
      *
      * @return string
      */
@@ -80,7 +80,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack('/user');
+            return $this->goBack();
         }
 
         $model->password = '';

@@ -13,6 +13,10 @@ use yii\web\NotFoundHttpException;
 class OrderController extends Controller
 {
 
+    /**
+     * Страница Список заявок
+     * @return string
+     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -26,6 +30,13 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Страница Изменение заявки
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
+     */
     public function actionUpdate($id)
     {
         $order = Order::findOne($id);
@@ -42,6 +53,14 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Изменение статуса заявки
+     * @param $id
+     * @param $status
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
+     */
     public function actionChangeStatus($id, $status)
     {
         $order = Order::findOne($id);
@@ -58,6 +77,11 @@ class OrderController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Страница История изменения заявки
+     * @param $id
+     * @return string
+     */
     public function actionHistory($id)
     {
         $dataProvider = new ActiveDataProvider([
@@ -71,6 +95,10 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Экспорт заявок в csv файл
+     * @return void
+     */
     public function actionExportCsv()
     {
         $orders = Order::find()->all();

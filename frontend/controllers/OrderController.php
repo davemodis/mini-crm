@@ -6,8 +6,14 @@ use common\models\Order;
 use Yii;
 use yii\web\Controller;
 
+
 class OrderController extends Controller
 {
+    /**
+     * Страница Создание заявки
+     * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
+     */
     public function actionCreate()
     {
         $order = new Order();

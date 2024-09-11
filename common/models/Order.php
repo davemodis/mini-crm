@@ -4,6 +4,9 @@ namespace common\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * Модел заявки
+ */
 class Order extends ActiveRecord
 {
     const SCENARIO_STATUS_CHANGE = 'status_change';
@@ -32,12 +35,17 @@ class Order extends ActiveRecord
 
     public function beforeSave($insert)
     {
+        // Назначаем имя заявки (в ТЗ указано это поле как обязательное,
+        // но не указано как его заполнять)
         if (empty($this->order_name)) {
             $this->order_name = 'Order ' . rand(1000, 9000);
         }
+
+        // присваиваем дату создания
         if ($insert) {
             $this->created_at = time();
         }
+
         $this->updated_at = time();
 
         return parent::beforeSave($insert);
@@ -54,8 +62,10 @@ class Order extends ActiveRecord
             $history->order_id = $this->id;
             $history->user_id = \Yii::$app->user->id;
             $history->changed_at = time();
-            unset($changedAttributes['created_at']);
+
+            // не сохраняем изменеия даты обновления
             unset($changedAttributes['updated_at']);
+
             $history->changes = json_encode($changedAttributes); // Сохраняем изменения как JSON
             $history->save();
         }

@@ -5,6 +5,9 @@ namespace common\models;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+/**
+ * Модель истории изменения заявки
+ */
 class OrderHistory extends ActiveRecord
 {
     public function rules()
