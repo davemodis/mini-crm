@@ -2,26 +2,34 @@
 
 https://docs.google.com/document/d/1TPd27pm-6qxLIXoW3JRwciIw53HzFrE7TOJ9gJp4kLA/edit
 
-## Запуск приложения
+### Запуск приложения
 
-### Запустить контейнеры
+Запускаем Docker
 ```bash
 docker compose up -d
 ```
 
-### Применить миграции
-
-Войти в контейнер
+Входим в контейнер
 ```bash
 docker compose exec -it backend sh
 ```
 
-Запустить применение миграций
+Запускаем инициализацию и применение миграций
 ```bash
+./init --env=Development --overwrite=All --delete=All && \
 ./yii migrate
 ```
 
 ### Открыть сайта
 
-backend доступен по ссылке http://127.0.0.1:21080/
-frontend доступн по сслыке http://127.0.0.1:20080/
+#### backend 
+доступен по ссылке http://127.0.0.1:21080/
+
+Email и пароль для входа
+```
+admin@example.com
+admin_password
+```
+
+#### frontend 
+доступн по сслыке http://127.0.0.1:20080/
